@@ -2,6 +2,10 @@
   "name": "time-tracker",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
     "cra-template": "1.2.0",
