@@ -90,11 +90,68 @@ npm start
 
 ## Building for Production
 
+### Local Build
+
+To create a production build locally:
+
 ```
 npm run build
 ```
 
 This will create an optimized build in the `build` folder that you can deploy to your hosting provider.
+
+### Deployment Options
+
+#### Option 1: Static Hosting (Netlify, Vercel, GitHub Pages)
+
+1. Create a production build:
+   ```
+   npm run build
+   ```
+
+2. Deploy to your preferred hosting platform:
+   - **Netlify**: Connect your GitHub repository or upload the build folder
+   - **Vercel**: Connect your GitHub repository
+   - **GitHub Pages**: Deploy the build folder using gh-pages package
+
+#### Option 2: Docker Deployment
+
+1. Create a Dockerfile in the root directory:
+   ```
+   FROM node:16-alpine AS build
+   WORKDIR /app
+   COPY package*.json ./
+   RUN npm install
+   COPY . .
+   RUN npm run build
+
+   FROM nginx:alpine
+   COPY --from=build /app/build /usr/share/nginx/html
+   EXPOSE 80
+   CMD ["nginx", "-g", "daemon off;"]
+   ```
+
+2. Build and run the Docker image:
+   ```
+   docker build -t time-tracker .
+   docker run -p 80:80 time-tracker
+   ```
+
+### Environment Variables
+
+For production deployment, make sure your hosting platform has these environment variables set:
+
+```
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Build Optimization Tips
+
+1. Remove console.log statements in production
+2. Enable gzip compression on your server
+3. Use CDN for static assets
+4. Consider code splitting for larger components
 
 ## Technologies Used
 
