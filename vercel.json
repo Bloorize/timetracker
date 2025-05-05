@@ -1,27 +1,11 @@
 {
-  "buildCommand": "npm run build:prod",
-  "outputDirectory": "build",
   "framework": "create-react-app",
+  "buildCommand": "CI=false npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "outputDirectory": "build",
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/robots.txt"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "^/static/(.*)", "dest": "/static/$1" },
+    { "src": "^/[^.]+$", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 } 
