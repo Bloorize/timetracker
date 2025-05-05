@@ -405,9 +405,10 @@ function App() {
           <div className="card" style={{ marginTop: '20px', padding: '20px' }}>
             <h2>Supabase Configuration Missing</h2>
             <p>To use this application, you need to set up your Supabase credentials.</p>
+            <p>Current environment: <strong>{process.env.NODE_ENV}</strong></p>
             <ol style={{ textAlign: 'left', display: 'inline-block' }}>
-              <li>Create a <code>.env.local</code> file in the root directory</li>
-              <li>Add the following lines to the file:</li>
+              <li>In Vercel, go to Project Settings → Environment Variables</li>
+              <li>Add the following variables:</li>
               <pre style={{ 
                 backgroundColor: '#f5f5f5', 
                 padding: '10px', 
@@ -417,8 +418,7 @@ function App() {
                 REACT_APP_SUPABASE_URL=your_supabase_url<br/>
                 REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
               </pre>
-              <li>Replace the placeholders with your actual Supabase credentials</li>
-              <li>Restart the development server</li>
+              <li>Redeploy the application</li>
             </ol>
             <p>See the README.md file for complete setup instructions.</p>
           </div>

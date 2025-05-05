@@ -9,6 +9,15 @@ if (!supabaseUrl || !supabaseKey) {
   console.error(
     'Error: Supabase environment variables are missing. Make sure you have set REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY in your .env file.'
   );
+  // Log available environment variables for debugging (without revealing sensitive values)
+  console.error('Available environment variables:', 
+    Object.keys(process.env)
+      .filter(key => key.startsWith('REACT_APP_'))
+      .reduce((obj, key) => {
+        obj[key] = key.includes('KEY') ? '[HIDDEN]' : process.env[key];
+        return obj;
+      }, {})
+  );
 }
 
 let supabase;
